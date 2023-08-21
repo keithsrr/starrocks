@@ -1601,6 +1601,7 @@ public class StmtExecutor {
             }
             return;
         } finally {
+            QeProcessorImpl.INSTANCE.unregisterQuery(context.getExecutionId());
             if (insertError) {
                 try {
                     if (jobId != -1) {
