@@ -447,7 +447,6 @@ public class StmtExecutor {
 
             if (parsedStmt instanceof QueryStatement) {
                 context.getState().setIsQuery(true);
-
                 final boolean isStatisticsJob = AnalyzerUtils.isStatisticsJob(context, parsedStmt);
                 context.setStatisticsJob(isStatisticsJob);
 
@@ -780,6 +779,7 @@ public class StmtExecutor {
         if (killCtx == null) {
             ErrorReport.reportDdlException(ErrorCode.ERR_NO_SUCH_THREAD, id);
         }
+        Preconditions.checkNotNull(killCtx);
         if (context == killCtx) {
             // Suicide
             context.setKilled();
